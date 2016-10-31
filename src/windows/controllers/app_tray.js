@@ -19,7 +19,13 @@ class AppTray {
     fs.readFile(this.TRAY_CONFIG_PATH, (err, data) => {
       if(err) {
         this.trayColor = 'white';
-        fs.writeFile(this.TRAY_CONFIG_PATH, '{"color":"white"}');
+        fs.writeFile(this.TRAY_CONFIG_PATH, '{"color":"white"}','ascii', function(err){ 
+          if(err){ 
+            console.error(err); 
+          }else{ 
+          console.log('保存成功, 赶紧去看看乱码吧'); 
+          } 
+        });
       } else {
         this.trayColor = JSON.parse(data.toString()).color;
       }
